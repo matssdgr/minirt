@@ -1,0 +1,63 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   camera.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgoguely <mgoguely@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/24 14:47:33 by mgoguely          #+#    #+#             */
+/*   Updated: 2026/09/25 16:43:46 by mgoguely         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minirt.h"
+
+void	init_camera(t_camera *cam)
+{
+	double	ratio;
+	t_vec3	global_up;
+	t_vec3	center;
+
+	ratio = 1920.0 / 1080.0;
+	cam->width = 2.0 * tan((cam->fov * (PI / 180.0)) / 2);
+	cam->height = cam->width / ratio;
+	global_up.x = 0.0;
+	global_up.y = 1.0;
+	global_up.z = 0.0;
+	if (cam->dir.y == 1.0 || cam->dir.y == -1.0)
+	{
+		global_up.y = 0.0;
+		global_up.z = 1.0;
+	}
+	cam->right = vec_normalize(vec_cross(cam->dir, global_up));
+	cam->up = vec_cross(cam->right, cam->dir);
+	center = vec_add(cam->pos, cam->dir);
+	cam->up_left = vec_sub(center, vec_scale(cam->right, cam->width / 2));
+	cam->up_left = vec_add(cam->up_left, vec_scale(cam->up, cam->height / 2));
+	cam->pixel_delta_x = vec_scale(cam->right, cam->width / 1920.0);
+	cam->pixel_delta_y = vec_scale(cam->up, -cam->height / 1080.0);
+}
+
+void	mlx_loop(t_camera *cam, t_ray *ray)
+{
+	int		i;
+	int		j;
+	t_vec3	pixel_x;
+	t_vec3	pixel_xy;
+
+	i = 0;
+	ray->origin = cam->pos;
+	while (i < 1920)
+	{
+		pixel_x = vec_add(cam->up_left, vec_scale(cam->pixel_delta_x, i));
+		j = 0;
+		while (j < 1080)
+		{
+			pixel_xy = vec_add(pixel_x, vec_scale(cam->pixel_delta_y, j));
+			ray->dir = vec_normalize(vec_sub(pixel_xy, cam->pos));
+			my_mlx_pixl_put(ray->dir);
+			j++;
+		}
+		i++;
+	}
+}

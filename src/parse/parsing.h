@@ -6,7 +6,7 @@
 /*   By: amine <amine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/27 12:28:58 by amine             #+#    #+#             */
-/*   Updated: 2026/10/29 16:16:50 by amine            ###   ########.fr       */
+/*   Updated: 2026/10/31 14:32:41 by amine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <math.h>
 # include "minirt.h"
 # include "libft.h"
+# include "get_next_line.h"
 
 typedef struct  s_parser
 {
@@ -55,7 +56,14 @@ const char  *parse_sphere(char **t, t_parser *p);
 const char  *parse_plane(char **t, t_parser *p);
 const char  *parse_cylinder(char **t, t_parser *p);
 
+/* parse_line */
+const char  *parse_line(char *line, t_parser *p);
+
+/* parse_scene */
+int         parse_file(const char   *path, t_scene *scene);
+
 /* utils */
-void    free_scene(t_scene *s);
+void        free_scene(t_scene *s);
+char        *get_next_line(int fd);
 
 #endif

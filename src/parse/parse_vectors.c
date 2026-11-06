@@ -6,7 +6,7 @@
 /*   By: amine <amine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/27 13:38:00 by amine             #+#    #+#             */
-/*   Updated: 2026/10/27 13:57:12 by amine            ###   ########.fr       */
+/*   Updated: 2026/11/06 08:07:24 by amine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int parse_vec3(const char *s, t_vec3 *v)
     t = ft_split(s, ',');
     if (!t)
         return (0);
-    ok = (split_len(t) == 3 && parse_color(t[0], &v->x) && parse_double(t[1], &v->y) && parse_double(t[2], &v->z));
+    ok = (split_len(t) == 3 && parse_double(t[0], &v->x) && parse_double(t[1], &v->y) && parse_double(t[2], &v->z));
     free_split(t);
     return (ok);
 }

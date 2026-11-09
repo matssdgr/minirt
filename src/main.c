@@ -6,11 +6,12 @@
 /*   By: amine <amine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/31 14:46:43 by amine             #+#    #+#             */
-/*   Updated: 2026/11/06 07:57:51 by amine            ###   ########.fr       */
+/*   Updated: 2026/11/09 12:45:56 by amine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../mlx/mlx_app.h"
+# include "../libft_utils/libft_utils.h"
 
 int main(int ac, char **av)
 {

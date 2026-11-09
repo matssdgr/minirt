@@ -6,7 +6,7 @@
 /*   By: amine <amine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/27 12:28:58 by amine             #+#    #+#             */
-/*   Updated: 2026/10/31 14:32:41 by amine            ###   ########.fr       */
+/*   Updated: 2026/11/09 12:45:16 by amine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <string.h>
 # include <math.h>
 # include "minirt.h"
-# include "libft.h"
-# include "get_next_line.h"
+# include "../../libft_utils/libft_utils.h"
+# include "../../get_next_line/get_next_line.h"
 
 typedef struct  s_parser
 {

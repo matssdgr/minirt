@@ -2,7 +2,7 @@
 # define MLX_APP_H
 
 # include <stdlib.h>
-# include "mlx.h"
+# include <mlx.h>
 # include "minirt.h"
 # include "parsing.h"
 
@@ -40,5 +40,6 @@ void    setup_hooks(t_app *app);
 /* mlx_render */
 void    put_pixel(t_img *img, int x, int y, int color);
 void    render_placeholder(t_app *app);
+void	render_scene(t_app *app, t_camera *cam);
 
 #endif

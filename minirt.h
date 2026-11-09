@@ -6,7 +6,7 @@
 /*   By: mgoguely <mgoguely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/02 23:11:26 by mgoguely          #+#    #+#             */
-/*   Updated: 2026/09/25 16:00:42 by mgoguely         ###   ########.fr       */
+/*   Updated: 2026/11/09 15:53:01 by mgoguely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,8 @@ int		impact_point(t_object *sphere, t_ray ray, t_hit *hit);
 int		shadow(t_scene scene, t_hit hit, t_ray *shadow);
 double	hit_plane(t_object plane, t_ray ray);
 void	record_hit_plane(t_object *plane, t_ray ray, double t, t_hit *hit);
+void	init_camera(t_camera *cam);
+int		get_ray_color(t_ray *ray, t_scene scene);
+
 
 #endif

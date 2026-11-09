@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amine <amine@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mgoguely <mgoguely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/31 14:46:43 by amine             #+#    #+#             */
-/*   Updated: 2026/11/09 12:45:56 by amine            ###   ########.fr       */
+/*   Updated: 2026/11/09 15:30:59 by mgoguely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ int main(int ac, char **av)
         ft_putstr_fd("Error\nMinilibx initialization failed\n", 2);
         return (1);
     }
+	init_camera(&app.scene.cam);
+	render_scene(&app, &app.scene.cam);
     setup_hooks(&app);
-    render_placeholder(&app);
     mlx_put_image_to_window(app.mlx, app.win, app.img.ptr, 0, 0);
     mlx_loop(app.mlx);
     return (0);

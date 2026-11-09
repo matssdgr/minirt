@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_numbers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amine <amine@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mgoguely <mgoguely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/27 13:24:23 by amine             #+#    #+#             */
-/*   Updated: 2026/10/27 14:30:49 by amine            ###   ########.fr       */
+/*   Updated: 2026/11/09 15:10:14 by mgoguely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,17 @@ int parse_double(const char *s, double *out)
         sign = -1;
     if (*s == '-' || *s == '+')
         s++;
-    res = 0;
+    res = 0.0;
     while (ft_isdigit(*s))
-    {
-        div /= 10;
-        res += (*s++ - '0') * div;
-    }
+		res = (res *10.0) + (*s++ - '0');
+	if (*s == '.')
+		s++;
+	div = 10.0;
+	while (ft_isdigit(*s))
+	{
+		res += (*s++ - '0') / div;
+		div *= 10.0;
+	}
     *out = res * sign;
     return (1);
 }

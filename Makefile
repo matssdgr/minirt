@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amine <amine@student.42.fr>                +#+  +:+       +#+         #
+#    By: mgoguely <mgoguely@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/11/09 12:39:15 by amine             #+#    #+#              #
-#    Updated: 2026/11/09 12:39:26 by amine            ###   ########.fr        #
+#    Updated: 2026/11/09 15:41:51 by mgoguely         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ INCLUDES	= -I. -Isrc/parse -Imlx -Ilibft_utils -I$(MLX_DIR)
 OBJ_DIR		= obj
 
 SRCS		= src/main.c \
+			  src/camera.c \
+			  src/color.c \
 			  src/rgb_utils.c \
 			  src/sphere.c \
 			  src/vector_utils.c \

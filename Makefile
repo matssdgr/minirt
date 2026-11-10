@@ -6,7 +6,7 @@
 #    By: mgoguely <mgoguely@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/11/09 12:39:15 by amine             #+#    #+#              #
-#    Updated: 2026/11/10 17:34:45 by mgoguely         ###   ########.fr        #
+#    Updated: 2026/11/10 22:09:48 by mgoguely         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,7 @@ $(OBJ_DIR)/%.o: %.c $(HEADERS)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	$(MAKE) -C $(MLX_DIR) clean
+	-$(MAKE) -C $(MLX_DIR) clean
 	rm -rf $(OBJ_DIR)
 
 fclean: clean

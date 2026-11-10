@@ -6,7 +6,7 @@
 /*   By: mgoguely <mgoguely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 22:25:31 by mgoguely          #+#    #+#             */
-/*   Updated: 2026/09/24 14:24:33 by mgoguely         ###   ########.fr       */
+/*   Updated: 2026/11/10 17:26:28 by mgoguely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	check_height(t_object cyl, t_ray ray, t_hit *hit, double t)
 	double	m;
 	t_vec3	q;
 
+	hit->point = ray_at(ray, t);
 	m = vec_dot(vec_sub(hit->point, cyl.pos), cyl.dir);
 	if (m >= cyl.height / 2.0 || m <= -cyl.height / 2.0)
 		return (0);
@@ -111,26 +112,28 @@ double	check_tube(t_object cyl, t_ray ray)
 	return (-1);
 }
 
-int hit_cylinder(t_object cyl, t_ray ray, t_hit *hit)
+int hit_cylinder(t_object *cyl, t_ray ray, t_hit *hit)
 {
 	double	t_tube;
 	double	t_caps;
-	t_hit	fake;
-	t_hit	fake2;
+	t_hit	tube;
+	t_hit	caps;
 
-	t_caps = check_caps(cyl, ray, &fake);
-	t_tube = check_tube(cyl, ray);
-	if (!check_height(cyl, ray, &fake2, t_tube))
-		t_tube = -1;
-	if ((t_tube > 0 && t_tube < t_caps) || (t_caps < 0 && t_tube > 0))
+	t_caps = check_caps(*cyl, ray, &caps);
+	t_tube = check_tube(*cyl, ray);
+	if (!check_height(*cyl, ray, &tube, t_tube) && t_tube > 0.0)
+		t_tube = -1.0;
+	if (t_tube > 0.0 && (t_caps <= 0.0 || t_tube < t_caps))
+		*hit = tube;
+	else if (t_caps > 0.0)
 	{
-		hit->normal = fake2.normal;
-		return (t_tube);
+		*hit = caps;
+		hit->point = ray_at(ray, t_caps);
+		t_tube = t_caps;
 	}
-	if (t_caps > 0)
-	{
-		hit->normal = fake.normal;
-		return (t_caps);
-	}
-	return (-1);
+	else
+		return (0);
+	hit->t = t_tube;
+	hit->object = cyl;
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: mgoguely <mgoguely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/20 15:44:01 by mgoguely          #+#    #+#             */
-/*   Updated: 2026/09/25 16:43:44 by mgoguely         ###   ########.fr       */
+/*   Updated: 2026/11/10 17:10:24 by mgoguely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	get_ray_color(t_ray *ray, t_scene scene)
 	t_vec3	final_color;
 
 	hit = get_closest_hit(scene, ray);
-	if (hit.distance > 0.0)
+	if (hit.t > 0.0)
 	{
 		pl = light(scene, hit);
 		final_color = get_final_color(hit, scene, pl);

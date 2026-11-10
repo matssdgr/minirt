@@ -6,7 +6,7 @@
 #    By: mgoguely <mgoguely@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/11/09 12:39:15 by amine             #+#    #+#              #
-#    Updated: 2026/11/09 15:41:51 by mgoguely         ###   ########.fr        #
+#    Updated: 2026/11/10 17:34:45 by mgoguely         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,10 @@ SRCS		= src/main.c \
 			  src/color.c \
 			  src/rgb_utils.c \
 			  src/sphere.c \
+			  src/cylinder.c \
+			  src/plane.c \
+			  src/shadow.c \
+			  src/intersection.c \
 			  src/vector_utils.c \
 			  src/vector_utils2.c \
 			  mlx/mlx_hooks.c \
@@ -49,11 +53,6 @@ SRCS		= src/main.c \
 			  src/parse/parse_split.c \
 			  src/parse/parse_vectors.c \
 			  src/parse/utils.c
-#			  src/camera.c \
-#			  src/color.c \
-#			  src/cylinder.c \
-#			  src/plane.c \
-#			  src/shadow.c \
 
 OBJS		= $(SRCS:%.c=$(OBJ_DIR)/%.o)
 HEADERS		= minirt.h src/parse/parsing.h libft_utils/libft_utils.h \
@@ -62,7 +61,7 @@ HEADERS		= minirt.h src/parse/parsing.h libft_utils/libft_utils.h \
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(MAKE) -C $(MLX_DIR)
+	$(MAKE) -C $(MLX_DIR) CC="gcc -std=gnu17"
 	$(CC) $(OBJS) $(MLX_FLAGS) -lm -o $(NAME)
 
 $(OBJ_DIR)/%.o: %.c $(HEADERS)

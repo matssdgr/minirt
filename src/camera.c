@@ -6,7 +6,7 @@
 /*   By: mgoguely <mgoguely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/24 14:47:33 by mgoguely          #+#    #+#             */
-/*   Updated: 2026/11/09 15:47:52 by mgoguely         ###   ########.fr       */
+/*   Updated: 2026/11/10 17:43:45 by mgoguely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,33 +30,32 @@ void	init_camera(t_camera *cam)
 		global_up.y = 0.0;
 		global_up.z = 1.0;
 	}
-	cam->right = vec_normalize(vec_cross(cam->dir, global_up));
-	cam->up = vec_cross(cam->right, cam->dir);
+	cam->right = vec_normalize(vec_cross(global_up, cam->dir));
+	cam->up = vec_cross(cam->dir, cam->right);
 	center = vec_add(cam->pos, cam->dir);
 	cam->up_left = vec_sub(center, vec_scale(cam->right, cam->width / 2));
 	cam->up_left = vec_add(cam->up_left, vec_scale(cam->up, cam->height / 2));
-	cam->pixel_delta_x = vec_scale(cam->right, cam->width / 1920.0);
-	cam->pixel_delta_y = vec_scale(cam->up, -cam->height / 1080.0);
+	cam->pixel_delta_x = vec_scale(cam->right, cam->width / WIDTH);
+	cam->pixel_delta_y = vec_scale(cam->up, -cam->height / HEIGHT);
 }
 
 void	render_scene(t_app *app, t_camera *cam)
 {
 	int		i;
 	int		j;
-	t_vec3	pixel_x;
-	t_vec3	pixel_xy;
+	t_vec3	pixel;
 	t_ray	ray;
 
 	j = 0;
 	ray.origin = cam->pos;
-	while (j < 1920)
+	while (j < HEIGHT)
 	{
-		pixel_x = vec_add(cam->up_left, vec_scale(cam->pixel_delta_x, i));
 		i = 0;
-		while (i < 1080)
+		while (i < WIDTH)
 		{
-			pixel_xy = vec_add(pixel_x, vec_scale(cam->pixel_delta_y, j));
-			ray.dir = vec_normalize(vec_sub(pixel_xy, cam->pos));
+			pixel = vec_add(cam->up_left, vec_scale(cam->pixel_delta_x, i));
+			pixel = vec_add(pixel, vec_scale(cam->pixel_delta_y, j));
+			ray.dir = vec_normalize(vec_sub(pixel, cam->pos));
 			put_pixel(&app->img, i, j, get_ray_color(&ray, app->scene));
 			i++;
 		}

@@ -3,25 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   parse_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amine <amine@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mgoguely <mgoguely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/27 14:34:12 by amine             #+#    #+#             */
-/*   Updated: 2026/10/29 11:16:42 by amine            ###   ########.fr       */
+/*   Updated: 2026/11/10 17:48:58 by mgoguely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "parsing.h"
 
-const char  *parse_ambient(char **t, t_parser *p)
+const char	*parse_ambient(char **t, t_parser *p)
 {
-    if (p->has_ambient)
-        return ("ambient light declared twice");
-    if (split_len(t) != 3)
-        return ("ambient: expected 'A ratio R,G,B'");
-    if (!parse_ranged(t[1], 0, 1, &p->scene->ambient_ratio))
-        return ("ambient: invalid color (R,G,B in [0-255])");
-    p->has_ambient = 1;
-    return (NULL);
+	if (p->has_ambient)
+		return ("ambient light declared twice");
+	if (split_len(t) != 3)
+		return ("ambient: expected 'A ratio R,G,B'");
+	if (!parse_ranged(t[1], 0, 1, &p->scene->ambient_ratio))
+		return ("ambient: ratio must be in [0.0,1.0]");
+	if (!parse_color(t[2], &p->scene->ambient_color))
+		return ("ambient: invalid color (R,G,B in [0-255])");    
+	p->has_ambient = 1;
+	return (NULL);
 }
 
 const char  *parse_camera(char **t, t_parser *p)

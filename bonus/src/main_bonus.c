@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../mlx/mlx_app.h"
+# include "../mlx/mlx_app_bonus.h"
 # include "../libft_utils/libft_utils.h"
 
 int main(int ac, char **av)

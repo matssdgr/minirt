@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 int	impact_plane(t_object *plane, t_ray ray, t_hit *hit)
 {

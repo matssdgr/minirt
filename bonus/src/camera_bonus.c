@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
-#include "mlx_app.h"
+#include "minirt_bonus.h"
+#include "mlx_app_bonus.h"
 
 void	init_camera(t_camera *cam)
 {

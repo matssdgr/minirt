@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#ifndef PARSING_BONUS_H
+# define PARSING_BONUS_H
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -19,7 +19,7 @@
 # include <errno.h>
 # include <string.h>
 # include <math.h>
-# include "minirt.h"
+# include "minirt_bonus.h"
 # include "../../libft_utils/libft_utils.h"
 # include "../../get_next_line/get_next_line.h"
 

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 static int	check_impact(t_object *obj, t_ray *ray, t_hit *temp)
 {

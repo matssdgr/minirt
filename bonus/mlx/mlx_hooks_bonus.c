@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_app.h"
+#include "mlx_app_bonus.h"
 
 static int  handle_key(int keycode, t_app *app)
 {

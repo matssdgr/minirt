@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_app.h"
+#include "mlx_app_bonus.h"
 
 void    put_pixel(t_img *img, int x, int y, int color)
 {

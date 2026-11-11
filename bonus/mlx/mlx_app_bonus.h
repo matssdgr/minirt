@@ -1,10 +1,10 @@
-#ifndef MLX_APP_H
-# define MLX_APP_H
+#ifndef MLX_APP_BONUS_H
+# define MLX_APP_BONUS_H
 
 # include <stdlib.h>
 # include <mlx.h>
-# include "minirt.h"
-# include "parsing.h"
+# include "minirt_bonus.h"
+# include "parsing_bonus.h"
 
 # define WIDTH          1280
 # define HEIGHT          720

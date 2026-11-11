@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "parsing.h"
+# include "parsing_bonus.h"
 
 void    free_scene(t_scene *s)
 {

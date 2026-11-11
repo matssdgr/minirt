@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_app.h"
+#include "mlx_app_bonus.h"
 
 int init_app(t_app *app)
 {

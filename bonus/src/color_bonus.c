@@ -6,26 +6,25 @@
 /*   By: mgoguely <mgoguely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/20 15:44:01 by mgoguely          #+#    #+#             */
-/*   Updated: 2026/11/10 23:00:37 by mgoguely         ###   ########.fr       */
+/*   Updated: 2026/11/11 20:11:36 by mgoguely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-double	light(t_scene scene, t_hit hit)
+double	light(t_scene scene, t_hit hit, t_light *l)
 {
 	t_vec3	li;
 	double	pl;
-	t_ray	s_ray;
 
-	if (shadow(scene, hit, &s_ray) == 1)
+	if (shadow(scene, hit, l) == 1)
 		return (0.0);
-	li = vec_sub(scene.light.pos, hit.point);
+	li = vec_sub(l->pos, hit.point);
 	li = vec_normalize(li);
 	pl = vec_dot(hit.normal, li);
 	if (pl < 0.0)
 		pl = 0.0;
-	pl = pl * scene.light.ratio;
+	pl = pl * l->ratio;
 	return (pl);
 }
 
@@ -34,26 +33,21 @@ t_vec3	calc_ambient(t_scene scene)
 	return (vec_scale(scene.ambient_color, scene.ambient_ratio));
 }
 
-t_vec3	calc_diffuse(t_scene scene, double pl)
+double	calc_specular(t_hit hit, t_light *l, t_vec3 view)
 {
-	return (vec_scale(scene.light.color, pl));
-}
-
-double	calc_specular(t_scene scene, t_hit hit, t_vec3 view)
-{
-	t_vec3	l;
+	t_vec3	li;
 	t_vec3	r;
 	double	rv;
 
-	l = vec_normalize(vec_sub(scene.light.pos, hit.point));
-	r = vec_sub(vec_scale(hit.normal, 2.0 * vec_dot(hit.normal, l)), l);
+	li = vec_normalize(vec_sub(l->pos, hit.point));
+	r = vec_sub(vec_scale(hit.normal, 2.0 * vec_dot(hit.normal, li)), li);
 	rv = vec_dot(r, view);
 	if (rv <= 0.0)
 		return (0.0);
-	return (scene.light.ratio * pow(rv, SHININESS));
+	return (l->ratio * pow(rv, SHININESS));
 }
 
-t_vec3	get_final_color(t_hit hit, t_scene scene, double pl, t_vec3 view)
+t_vec3	get_final_color(t_hit hit, t_scene scene, t_vec3 view)
 {
 	t_vec3	total_light;
 	t_vec3	final_color;

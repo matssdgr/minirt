@@ -6,7 +6,7 @@
 /*   By: mgoguely <mgoguely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/10 22:19:18 by mgoguely          #+#    #+#             */
-/*   Updated: 2026/11/10 22:47:34 by mgoguely         ###   ########.fr       */
+/*   Updated: 2026/11/11 19:56:35 by mgoguely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_light
 	t_vec3			pos;
 	t_vec3			color;
 	double			ratio;
+	struct s_light	*next;
 }	t_light;
 
 typedef struct s_object
@@ -75,7 +76,7 @@ typedef struct s_scene
 	t_vec3		ambient_color;
 	double		ambient_ratio;
 
-	t_light		light;
+	t_light		*lights;
 	t_object	*objects;
 }	t_scene;
 
@@ -103,22 +104,22 @@ t_vec3	vec_cross(t_vec3 a, t_vec3 b);
 t_vec3	ray_at(t_ray ray, double t);
 t_vec3	vec_multiply(t_vec3 a, t_vec3 b);
 t_vec3	norm_color(t_vec3 color);
-double	light(t_scene scene, t_hit hit);
+double	light(t_scene scene, t_hit hit, t_light *l);
 t_vec3	calc_ambient(t_scene scene);
-t_vec3	calc_diffuse(t_scene scene, double pl);
-double	calc_specular(t_scene scene, t_hit hit, t_vec3 view);
-t_vec3	get_final_color(t_hit hit, t_scene scene, double pl, t_vec3 view);
+double	calc_specular(t_hit hit, t_light *l, t_vec3 view);
+t_vec3	get_final_color(t_hit hit, t_scene scene, t_vec3 view);
 int		get_mlx_color(t_vec3 color);
 double	hit_sphere(t_object sphere, t_ray ray);
 t_vec3	sphere_normale(t_object sphere, t_vec3 hit_point);
 int		impact_point(t_object *sphere, t_ray ray, t_hit *hit);
-int		shadow(t_scene scene, t_hit hit, t_ray *shadow);
+int		shadow(t_scene scene, t_hit hit, t_light *l);
 double	hit_plane(t_object plane, t_ray ray);
 void	record_hit_plane(t_object *plane, t_ray ray, double t, t_hit *hit);
 void	init_camera(t_camera *cam);
 int		get_ray_color(t_ray *ray, t_scene scene);
 t_hit	get_closest_hit(t_scene scene, t_ray *ray);
 int		hit_cylinder(t_object *cyl, t_ray ray, t_hit *hit);
-int	impact_plane(t_object *plane, t_ray ray, t_hit *hit);
+int		impact_plane(t_object *plane, t_ray ray, t_hit *hit);
+t_vec3	light_contrib(t_scene scene, t_hit hit, t_light *l, t_vec3 view);
 
 #endif

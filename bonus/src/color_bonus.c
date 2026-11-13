@@ -6,7 +6,7 @@
 /*   By: mgoguely <mgoguely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/20 15:44:01 by mgoguely          #+#    #+#             */
-/*   Updated: 2026/11/13 18:44:19 by mgoguely         ###   ########.fr       */
+/*   Updated: 2026/11/13 18:53:37 by mgoguely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ t_vec3	get_final_color(t_hit hit, t_scene scene, t_vec3 view)
 	t_light	*l;
 
 	color = vec_multiply(hit.object->color, calc_ambient(scene));
-	color = vecscale(color, 1.0 / 255.0);
-	l = scene.lights
+	color = vec_scale(color, 1.0 / 255.0);
+	l = scene.lights;
 	while (l)
 	{
 		color = vec_add(color, light_contrib(scene, hit, l, view));

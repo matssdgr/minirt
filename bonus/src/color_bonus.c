@@ -6,7 +6,7 @@
 /*   By: mgoguely <mgoguely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/20 15:44:01 by mgoguely          #+#    #+#             */
-/*   Updated: 2026/11/11 20:11:36 by mgoguely         ###   ########.fr       */
+/*   Updated: 2026/11/13 18:44:19 by mgoguely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,35 @@ double	calc_specular(t_hit hit, t_light *l, t_vec3 view)
 	return (l->ratio * pow(rv, SHININESS));
 }
 
+t_vec3	light_contrib(t_scene scene, t_hit hit, t_light *l, t_vec3 view)
+{
+	double	pl;
+	t_vec3	diffuse;
+	t_vec3	spec;
+
+	pl = light(scene, hit, l);
+	if (pl <= 0.0)
+		return (vec_scale(l->color, 0.0));
+	diffuse = vec_multiply(vec_scale(l->color, pl), hit.object->color);
+	diffuse = vec_scale(diffuse, 1.0 / 255.0);
+	spec = vec_scale(l->color, calc_specular(hit, l, view));
+	return (vec_add(spec, diffuse));
+}
+
 t_vec3	get_final_color(t_hit hit, t_scene scene, t_vec3 view)
 {
-	t_vec3	total_light;
-	t_vec3	final_color;
-	double	spec;
+	t_vec3	color;
+	t_light	*l;
 
-	total_light = vec_add(calc_ambient(scene), calc_diffuse(scene, pl));
-	final_color = vec_multiply(hit.object->color, total_light);
-	final_color = vec_scale(final_color, 1.0 / 255.0);
-	if (pl > 0.0)
+	color = vec_multiply(hit.object->color, calc_ambient(scene));
+	color = vecscale(color, 1.0 / 255.0);
+	l = scene.lights
+	while (l)
 	{
-		spec = calc_specular(scene, hit, view);
-		final_color = vec_add(final_color, vec_scale(scene.light.color, spec));
+		color = vec_add(color, light_contrib(scene, hit, l, view));
+		l = l->next;
 	}
-	final_color = norm_color(final_color);
-	return (final_color);
+	return (norm_color(color));
 }
 
 int	get_mlx_color(t_vec3 color)
@@ -76,15 +89,12 @@ int	get_mlx_color(t_vec3 color)
 int	get_ray_color(t_ray *ray, t_scene scene)
 {
 	t_hit	hit;
-	double	pl;
 	t_vec3	final_color;
 
 	hit = get_closest_hit(scene, ray);
 	if (hit.t > 0.0)
 	{
-		pl = light(scene, hit);
-		final_color = get_final_color(hit, scene, pl, vec_scale(ray->dir,
-				-1.0));
+		final_color = get_final_color(hit, scene, vec_scale(ray->dir, -1.0));
 		return (get_mlx_color(final_color));
 	}
 	return (0x000000);

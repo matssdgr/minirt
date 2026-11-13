@@ -6,7 +6,7 @@
 /*   By: mgoguely <mgoguely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/20 15:44:01 by mgoguely          #+#    #+#             */
-/*   Updated: 2026/11/10 17:10:24 by mgoguely         ###   ########.fr       */
+/*   Updated: 2026/11/13 20:20:14 by mgoguely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,6 @@ t_vec3	get_final_color(t_hit hit, t_scene scene, double pl)
 	final_color = vec_scale(final_color, 1.0 / 255.0);
 	final_color = norm_color(final_color);
 	return (final_color);
-}
-
-int	get_mlx_color(t_vec3 color)
-{
-	int	rgb;
-
-	rgb = (int)color.x << 16 | (int)color.y << 8 | (int)color.z;
-	return (rgb);
 }
 
 int	get_ray_color(t_ray *ray, t_scene scene)

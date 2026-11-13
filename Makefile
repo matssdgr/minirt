@@ -6,7 +6,7 @@
 #    By: mgoguely <mgoguely@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/11/09 12:39:15 by amine             #+#    #+#              #
-#    Updated: 2026/11/11 14:20:27 by mgoguely         ###   ########.fr        #
+#    Updated: 2026/11/13 20:29:06 by mgoguely         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -121,7 +121,8 @@ $(OBJ_DIR_B)/%.o: %.c $(HEADERS_B)
 
 clean:
 	-$(MAKE) -C $(MLX_DIR) clean
-	rm -rf $(OBJ_DIR)
+	rm -rf $(OBJ_DIR) $(OBJ_DIR_B)
+	rm -f miniRT_bonus
 
 fclean: clean
 	rm -f $(NAME)

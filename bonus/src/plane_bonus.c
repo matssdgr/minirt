@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plane.c                                            :+:      :+:    :+:   */
+/*   plane_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgoguely <mgoguely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/21 21:47:46 by mgoguely          #+#    #+#             */
-/*   Updated: 2026/11/10 17:36:59 by mgoguely         ###   ########.fr       */
+/*   Updated: 2026/11/13 20:31:14 by mgoguely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,3 @@ void	record_hit_plane(t_object *plane, t_ray ray, double t, t_hit *hit)
 	if (vec_dot(ray.dir, hit->normal) > 0.0)
 		hit->normal = vec_scale(hit->normal, -1.0);
 }
-

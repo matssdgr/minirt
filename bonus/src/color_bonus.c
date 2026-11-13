@@ -6,7 +6,7 @@
 /*   By: mgoguely <mgoguely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/20 15:44:01 by mgoguely          #+#    #+#             */
-/*   Updated: 2026/11/13 18:53:37 by mgoguely         ###   ########.fr       */
+/*   Updated: 2026/11/13 20:35:56 by mgoguely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,6 @@ double	light(t_scene scene, t_hit hit, t_light *l)
 		pl = 0.0;
 	pl = pl * l->ratio;
 	return (pl);
-}
-
-t_vec3	calc_ambient(t_scene scene)
-{
-	return (vec_scale(scene.ambient_color, scene.ambient_ratio));
-}
-
-double	calc_specular(t_hit hit, t_light *l, t_vec3 view)
-{
-	t_vec3	li;
-	t_vec3	r;
-	double	rv;
-
-	li = vec_normalize(vec_sub(l->pos, hit.point));
-	r = vec_sub(vec_scale(hit.normal, 2.0 * vec_dot(hit.normal, li)), li);
-	rv = vec_dot(r, view);
-	if (rv <= 0.0)
-		return (0.0);
-	return (l->ratio * pow(rv, SHININESS));
 }
 
 t_vec3	light_contrib(t_scene scene, t_hit hit, t_light *l, t_vec3 view)

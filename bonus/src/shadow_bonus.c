@@ -6,7 +6,7 @@
 /*   By: mgoguely <mgoguely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/21 20:44:01 by mgoguely          #+#    #+#             */
-/*   Updated: 2026/11/11 20:01:36 by mgoguely         ###   ########.fr       */
+/*   Updated: 2026/11/13 20:31:19 by mgoguely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	shadow(t_scene scene, t_hit hit, t_light *l)
 {
-	t_vec3		offset;
-	double		length;
-	t_hit		block;
-	t_ray		sha;
+	t_vec3	offset;
+	double	length;
+	t_hit	block;
+	t_ray	sha;
 
 	offset = vec_scale(hit.normal, 0.001);
 	sha.origin = vec_add(hit.point, offset);

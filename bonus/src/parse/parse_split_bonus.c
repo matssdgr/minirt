@@ -1,47 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_split.c                                      :+:      :+:    :+:   */
+/*   parse_split_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amine <amine@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mgoguely <mgoguely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/27 12:28:50 by amine             #+#    #+#             */
-/*   Updated: 2026/10/27 13:24:02 by amine            ###   ########.fr       */
+/*   Updated: 2026/11/13 20:30:48 by mgoguely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing_bonus.h"
 
-int count_char(const char *s, char c)
+int	count_char(const char *s, char c)
 {
-    int n;
+	int	n;
 
-    n = 0;
-    while (*s)
-    {
-        if (*s == c)
-            n++;
-        s++;
-    }
-    return (n);
+	n = 0;
+	while (*s)
+	{
+		if (*s == c)
+			n++;
+		s++;
+	}
+	return (n);
 }
 
-int split_len(char **t)
+int	split_len(char **t)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (t[i])
-        i++;
-    return (i);
+	i = 0;
+	while (t[i])
+		i++;
+	return (i);
 }
 
-void    free_split(char **t)
+void	free_split(char **t)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (t[i])
-        free(t[i++]);
-    free(t);
+	i = 0;
+	while (t[i])
+		free(t[i++]);
+	free(t);
 }

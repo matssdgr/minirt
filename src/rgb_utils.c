@@ -6,7 +6,7 @@
 /*   By: mgoguely <mgoguely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/21 19:00:04 by mgoguely          #+#    #+#             */
-/*   Updated: 2026/09/21 19:22:29 by mgoguely         ###   ########.fr       */
+/*   Updated: 2026/11/13 20:21:48 by mgoguely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,12 @@ t_vec3	norm_color(t_vec3 color)
 	if (color.z > 255.0)
 		color.z = 255.0;
 	return (color);
+}
+
+int	get_mlx_color(t_vec3 color)
+{
+	int	rgb;
+
+	rgb = (int)color.x << 16 | (int)color.y << 8 | (int)color.z;
+	return (rgb);
 }

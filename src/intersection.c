@@ -6,7 +6,7 @@
 /*   By: mgoguely <mgoguely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/09 15:53:30 by mgoguely          #+#    #+#             */
-/*   Updated: 2026/11/10 17:36:45 by mgoguely         ###   ########.fr       */
+/*   Updated: 2026/11/13 20:16:59 by mgoguely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_hit	get_closest_hit(t_scene scene, t_ray *ray)
 	while (obj)
 	{
 		if (check_impact(obj, ray, &temp))
-		{	
+		{
 			if (closest.t < 0.0 || temp.t < closest.t)
 				closest = temp;
 		}

@@ -6,7 +6,7 @@
 /*   By: mgoguely <mgoguely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/20 14:27:23 by mgoguely          #+#    #+#             */
-/*   Updated: 2026/09/20 15:43:58 by mgoguely         ###   ########.fr       */
+/*   Updated: 2026/11/13 20:18:22 by mgoguely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,3 @@ int	impact_point(t_object *sphere, t_ray ray, t_hit *hit)
 	hit->object = sphere;
 	return (1);
 }
-
-
